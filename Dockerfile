@@ -1,9 +1,15 @@
-FROM node:alpine
+ARG TARGET_PLATFORM=linux/amd64
+FROM --platform=${TARGET_PLATFORM} node:alpine
 
 RUN npm install -g tiddlywiki@5.2.7
 
-# Setup wiki volume
-VOLUME /var/lib/tiddlywiki
+RUN addgroup -g 10001 -S tiddlywiki && \
+    adduser -u 10001 -S tiddlywiki -G tiddlywiki
+RUN mkdir -p /var/lib/tiddlywiki && \
+    chown -R tiddlywiki:tiddlywiki /var/lib/tiddlywiki
+
+USER tiddlywiki
+
 WORKDIR /var/lib/tiddlywiki
 
 # Add init-and-run script
