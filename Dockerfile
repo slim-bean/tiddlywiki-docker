@@ -1,7 +1,7 @@
 ARG TARGET_PLATFORM=linux/amd64
 FROM --platform=${TARGET_PLATFORM} node:alpine
 
-RUN npm install -g tiddlywiki@5.2.7
+RUN npm install -g tiddlywiki@5.3.6
 
 RUN addgroup -g 10001 -S tiddlywiki && \
     adduser -u 10001 -S tiddlywiki -G tiddlywiki
