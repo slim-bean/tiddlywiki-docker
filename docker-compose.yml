@@ -1,0 +1,17 @@
+services:
+  tiddlywiki:
+    build:
+      context: .
+      args:
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
+    ports:
+      - "8080:8080"
+    volumes:
+      - tiddlywiki-data:/data
+    environment:
+      WIKI_NAME: ${WIKI_NAME:-wiki}
+    restart: unless-stopped
+
+volumes:
+  tiddlywiki-data:
